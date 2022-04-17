@@ -38,7 +38,7 @@ namespace FileCorrupter
 
             filePathTb.Text = sourceFileName;
 
-            Log("Selected file: " + sourceFileName);
+            Print("Selected file: " + sourceFileName);
         }
 
         private void MainActionBtn_Click(object sender, EventArgs e)
@@ -51,36 +51,36 @@ namespace FileCorrupter
 
             try
             {
-                sourceFile = ReadSourceFile();
+                sourceFile = ReadSourceFile(sourceFileName);
 
-                if (sourceFile.Length <= 1)
+                if (sourceFile.Length < 1)
                 {
                     ShowErrorMessage("File is empty!");
                     return;
                 }
 
-                Log("File readed successfully!");
-                Log(BitConverter.ToString(sourceFile));
+                Print("File readed successfully!");
+                Print(BitConverter.ToString(sourceFile));
 
                 corruptedFile = CorruptFile(sourceFile);
+
+                if (corruptedFile == null)
+                {
+                    MessageBox.Show("Something went wrong, please, try again!", "Error");
+                    return;
+                }
 
                 string dirPath = Path.GetDirectoryName(sourceFileName);
                 string name = Path.GetFileNameWithoutExtension(sourceFileName);
                 string extension = Path.GetExtension(sourceFileName);
 
-                Log(dirPath);
-                Log(name);
-                Log(extension);
-
                 corruptedFileName = @$"{dirPath}\{name}_corrupted{extension}";
 
-                Log(corruptedFileName);
+                Print(corruptedFileName);
 
                 SaveCorruptedFile(corruptedFile, corruptedFileName);
 
-                Log("Corrupted file was saved");
-
-                Log(BitConverter.ToString(corruptedFile));
+                Print("Corrupted file was saved");
             }
             catch (Exception ex)
             {
@@ -89,9 +89,9 @@ namespace FileCorrupter
                 
         }
 
-        private byte[] ReadSourceFile()
+        private byte[] ReadSourceFile(string filePath)
         {
-            var file = File.ReadAllBytes(sourceFileName);
+            var file = File.ReadAllBytes(filePath);
             return file;
         }
 
@@ -99,16 +99,16 @@ namespace FileCorrupter
         {
             try
             {
-                var f = file;
+                byte[] f = new byte[file.Length]; 
+                Array.Copy(file, f, file.Length);
 
                 byte replacementByte = 255;
 
-                // TODO move to consts/config class
-                int offset = 8;
+                int offset = 16;
 
                 if (f.Length <= offset)
                 {
-                    offset = f.Length;
+                    offset = f.Length / 4;
                 }
 
                 for (int i = 0; i < offset; i++)
@@ -143,7 +143,7 @@ namespace FileCorrupter
             }
         }
 
-        private void Log (string text)
+        private void Print (string text)
         {
             debugTb.Text += text;
             debugTb.Text += Environment.NewLine;
@@ -157,5 +157,54 @@ namespace FileCorrupter
             MessageBox.Show(errorText, "Error");
         }
 
+        private void cleanLogBtn_Click(object sender, EventArgs e)
+        {
+            debugTb.Text = "";
+        }
+
+        private void showFilePreviewBtn_Click(object sender, EventArgs e)
+        {
+            if (sourceFileName == string.Empty || sourceFileName == null)
+            {
+                ShowErrorMessage("File was not selected!");
+                return;
+            }
+
+            try
+            {
+                sourceFile = ReadSourceFile(sourceFileName);
+
+                if (sourceFile.Length < 1)
+                {
+                    ShowErrorMessage("File is empty!");
+                    return;
+                }
+
+                corruptedFile = CorruptFile(sourceFile);
+
+                if (corruptedFile == null)
+                {
+                    ShowErrorMessage("Something went wrong, please, try again!");
+                    return;
+                }
+
+                Form filePreview = new FilePreview(sourceFile, corruptedFile);
+                filePreview.Show();
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMessage(ex.ToString());
+            }        
+        }
+
+        private void openFolderBtn_Click(object sender, EventArgs e)
+        {
+            ShowErrorMessage("Not implemented yet");
+        }
+
+        private void infoBtn_Click(object sender, EventArgs e)
+        {
+            ShowErrorMessage("Not implemented yet");
+        }
     }
 }
