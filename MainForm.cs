@@ -201,7 +201,20 @@ namespace FileCorrupter
 
         private void openFolderBtn_Click(object sender, EventArgs e)
         {
-            ShowErrorMessage("Not implemented yet");
+            if (sourceFileName == string.Empty || sourceFileName == null)
+            {
+                ShowErrorMessage("File was not selected!");
+                return;
+            }
+
+            string dirPath = Path.GetDirectoryName(sourceFileName);
+
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+            {
+                FileName = dirPath,
+                UseShellExecute = true,
+                Verb = "open"
+            });
         }
 
         private void infoBtn_Click(object sender, EventArgs e)
