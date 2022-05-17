@@ -16,6 +16,8 @@ namespace FileCorrupter
         public MainForm()
         {
             InitializeComponent();
+            // hide focus
+            this.ActiveControl = fakeLabel;
         }
 
         private string sourceFileName;

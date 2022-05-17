@@ -13,6 +13,8 @@ namespace FileCorrupter
         public FilePreview(byte[] sourceFile, byte[] corruptedFile)
         {
             InitializeComponent();
+            // hide focus
+            this.ActiveControl = fakeLabel;
             Print(this.sourceFileTb, sourceFile);
             Print(this.corruptedFileTb, corruptedFile);
         }
@@ -24,7 +26,8 @@ namespace FileCorrupter
             int i = 0;
             int limit = 1024;
 
-            tb.Text += $"First {limit.ToString()} bytes:";
+            tb.Text += $"Shown first {limit.ToString()} bytes:";
+            tb.Text += Environment.NewLine;
             tb.Text += Environment.NewLine;
 
             while (i < limit && i < file.Length)

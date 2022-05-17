@@ -33,6 +33,7 @@ namespace FileCorrupter
             this.corruptedFileTb = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.fakeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // sourceFileTb
@@ -73,11 +74,20 @@ namespace FileCorrupter
             this.label2.TabIndex = 3;
             this.label2.Text = "Corrupted file";
             // 
+            // fakeLabel
+            // 
+            this.fakeLabel.AutoSize = true;
+            this.fakeLabel.Location = new System.Drawing.Point(391, 2);
+            this.fakeLabel.Name = "fakeLabel";
+            this.fakeLabel.Size = new System.Drawing.Size(0, 15);
+            this.fakeLabel.TabIndex = 4;
+            // 
             // FilePreview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.fakeLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.corruptedFileTb);
@@ -95,5 +105,6 @@ namespace FileCorrupter
         private System.Windows.Forms.TextBox corruptedFileTb;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label fakeLabel;
     }
 }

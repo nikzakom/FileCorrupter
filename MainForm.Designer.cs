@@ -39,6 +39,7 @@ namespace FileCorrupter
             this.openFolderBtn = new System.Windows.Forms.Button();
             this.showFilePreviewBtn = new System.Windows.Forms.Button();
             this.infoBtn = new System.Windows.Forms.Button();
+            this.fakeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // mainActionBtn
@@ -120,11 +121,20 @@ namespace FileCorrupter
             this.infoBtn.UseVisualStyleBackColor = true;
             this.infoBtn.Click += new System.EventHandler(this.infoBtn_Click);
             // 
+            // fakeLabel
+            // 
+            this.fakeLabel.AutoSize = true;
+            this.fakeLabel.Location = new System.Drawing.Point(325, 3);
+            this.fakeLabel.Name = "fakeLabel";
+            this.fakeLabel.Size = new System.Drawing.Size(0, 15);
+            this.fakeLabel.TabIndex = 8;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 423);
+            this.Controls.Add(this.fakeLabel);
             this.Controls.Add(this.infoBtn);
             this.Controls.Add(this.showFilePreviewBtn);
             this.Controls.Add(this.openFolderBtn);
@@ -153,6 +163,7 @@ namespace FileCorrupter
         private System.Windows.Forms.Button openFolderBtn;
         private System.Windows.Forms.Button showFilePreviewBtn;
         private System.Windows.Forms.Button infoBtn;
+        private System.Windows.Forms.Label fakeLabel;
     }
 }
 
