@@ -50,7 +50,7 @@ namespace FileCorrupter
             }
 
             try
-            {
+            {      
                 sourceFile = ReadSourceFile(sourceFileName);
 
                 if (sourceFile.Length < 1)
@@ -60,7 +60,8 @@ namespace FileCorrupter
                 }
 
                 Print("File readed successfully!");
-                Print(BitConverter.ToString(sourceFile));
+                Print("Processing...");
+                //Print(BitConverter.ToString(sourceFile));
 
                 corruptedFile = CorruptFile(sourceFile);
 
@@ -76,11 +77,10 @@ namespace FileCorrupter
 
                 corruptedFileName = @$"{dirPath}\{name}_corrupted{extension}";
 
-                Print(corruptedFileName);
-
                 SaveCorruptedFile(corruptedFile, corruptedFileName);
 
-                Print("Corrupted file was saved");
+                Print("Corrupted file was saved successfully!");
+                Print(@$"Path : {corruptedFileName}");
             }
             catch (Exception ex)
             {
