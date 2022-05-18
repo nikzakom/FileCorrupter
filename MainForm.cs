@@ -16,7 +16,8 @@ namespace FileCorrupter
         public MainForm()
         {
             InitializeComponent();
-            // hide focus
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
+            // hide default focus on random element
             this.ActiveControl = fakeLabel;
         }
 
@@ -25,6 +26,8 @@ namespace FileCorrupter
 
         private byte[] sourceFile;
         private byte[] corruptedFile;
+
+        FilePreview filePreview;
 
         private void SelectFileBtn_Click(object sender, EventArgs e)
         {
@@ -36,11 +39,49 @@ namespace FileCorrupter
                 return;
             }
 
-            sourceFileName = openFileDialog.FileName;
+            if (openFileDialog.FileName == string.Empty)
+            {
+                return;
+            }
+            else
+            {
+                sourceFileName = openFileDialog.FileName;
 
-            filePathTb.Text = sourceFileName;
+                filePathTb.Text = sourceFileName;
 
-            Print("Selected file: " + sourceFileName);
+                Print("Selected file: " + sourceFileName);
+
+                if (Application.OpenForms.OfType<FilePreview>().Count() == 1)
+                {
+                    filePreview.Close();
+
+                    try
+                    {
+                        sourceFile = ReadSourceFile(sourceFileName);
+
+                        if (sourceFile.Length < 1)
+                        {
+                            ShowErrorMessage("File is empty!");
+                            return;
+                        }
+
+                        corruptedFile = CorruptFile(sourceFile);
+
+                        if (corruptedFile == null)
+                        {
+                            ShowErrorMessage("Something went wrong, please, try again!");
+                            return;
+                        }
+
+                        CreateFilePreview(sourceFile, corruptedFile);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowErrorMessage(ex.ToString());
+                    }
+                }
+            }
         }
 
         private void MainActionBtn_Click(object sender, EventArgs e)
@@ -87,8 +128,7 @@ namespace FileCorrupter
             catch (Exception ex)
             {
                 ShowErrorMessage(ex.ToString());
-            }
-                
+            }        
         }
 
         private byte[] ReadSourceFile(string filePath)
@@ -129,7 +169,7 @@ namespace FileCorrupter
 
         private void SaveCorruptedFile(byte[] file, string path)
         {
-            if (file == null)
+            if (file == null || file.Length == 0)
             {
                 ShowErrorMessage("Something went wrong...");
                 return;
@@ -159,9 +199,25 @@ namespace FileCorrupter
             MessageBox.Show(errorText, "Error");
         }
 
-        private void cleanLogBtn_Click(object sender, EventArgs e)
+        private void ShowMessage(string text, string header)
+        {
+            MessageBox.Show(text, header);
+        }
+
+        private void resetBtn_Click(object sender, EventArgs e)
         {
             debugTb.Text = "";
+            filePathTb.Text = "";
+            sourceFileName = null;
+            corruptedFileName = null;
+            sourceFile = null;
+            corruptedFile = null;
+
+            if (filePreview != null)
+            {
+                filePreview.Close();
+                filePreview = null;
+            }
         }
 
         private void showFilePreviewBtn_Click(object sender, EventArgs e)
@@ -169,6 +225,12 @@ namespace FileCorrupter
             if (sourceFileName == string.Empty || sourceFileName == null)
             {
                 ShowErrorMessage("File was not selected!");
+                return;
+            }
+
+            if (Application.OpenForms.OfType<FilePreview>().Count() == 1)
+            {
+                filePreview.Focus();
                 return;
             }
 
@@ -190,8 +252,8 @@ namespace FileCorrupter
                     return;
                 }
 
-                Form filePreview = new FilePreview(sourceFile, corruptedFile);
-                filePreview.Show();
+                CreateFilePreview(sourceFile, corruptedFile);
+                
             }
             catch (Exception ex)
             {
@@ -217,9 +279,24 @@ namespace FileCorrupter
             });
         }
 
+        private void CreateFilePreview(byte[] sourceFile, byte[] corruptedFile)
+        {
+            filePreview = new FilePreview(sourceFile, corruptedFile);
+            filePreview.Show();
+        }
+
         private void infoBtn_Click(object sender, EventArgs e)
         {
-            ShowErrorMessage("Not implemented yet");
+            string infoFilePath = AppDomain.CurrentDomain.BaseDirectory + "info.txt";
+
+            try
+            {
+                ShowMessage(File.ReadAllText(infoFilePath), "App Info");
+            }
+            catch
+            {
+                ShowErrorMessage("Something went wrong!");
+            }
         }
     }
 }

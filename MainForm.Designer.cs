@@ -89,7 +89,7 @@ namespace FileCorrupter
             this.cleanLogBtn.Size = new System.Drawing.Size(32, 32);
             this.cleanLogBtn.TabIndex = 4;
             this.cleanLogBtn.UseVisualStyleBackColor = true;
-            this.cleanLogBtn.Click += new System.EventHandler(this.cleanLogBtn_Click);
+            this.cleanLogBtn.Click += new System.EventHandler(this.resetBtn_Click);
             // 
             // openFolderBtn
             // 
@@ -107,7 +107,7 @@ namespace FileCorrupter
             this.showFilePreviewBtn.Name = "showFilePreviewBtn";
             this.showFilePreviewBtn.Size = new System.Drawing.Size(164, 57);
             this.showFilePreviewBtn.TabIndex = 6;
-            this.showFilePreviewBtn.Text = "Show HEX file preview";
+            this.showFilePreviewBtn.Text = "Show HEX preview";
             this.showFilePreviewBtn.UseVisualStyleBackColor = true;
             this.showFilePreviewBtn.Click += new System.EventHandler(this.showFilePreviewBtn_Click);
             // 
@@ -117,7 +117,7 @@ namespace FileCorrupter
             this.infoBtn.Name = "infoBtn";
             this.infoBtn.Size = new System.Drawing.Size(75, 57);
             this.infoBtn.TabIndex = 7;
-            this.infoBtn.Text = "info";
+            this.infoBtn.Text = "Show info";
             this.infoBtn.UseVisualStyleBackColor = true;
             this.infoBtn.Click += new System.EventHandler(this.infoBtn_Click);
             // 

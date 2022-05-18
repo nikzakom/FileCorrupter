@@ -38,28 +38,28 @@ namespace FileCorrupter
             // 
             // sourceFileTb
             // 
-            this.sourceFileTb.Location = new System.Drawing.Point(12, 62);
+            this.sourceFileTb.Location = new System.Drawing.Point(12, 40);
             this.sourceFileTb.Multiline = true;
             this.sourceFileTb.Name = "sourceFileTb";
             this.sourceFileTb.ReadOnly = true;
             this.sourceFileTb.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.sourceFileTb.Size = new System.Drawing.Size(375, 375);
+            this.sourceFileTb.Size = new System.Drawing.Size(375, 398);
             this.sourceFileTb.TabIndex = 0;
             // 
             // corruptedFileTb
             // 
-            this.corruptedFileTb.Location = new System.Drawing.Point(413, 63);
+            this.corruptedFileTb.Location = new System.Drawing.Point(413, 40);
             this.corruptedFileTb.Multiline = true;
             this.corruptedFileTb.Name = "corruptedFileTb";
             this.corruptedFileTb.ReadOnly = true;
             this.corruptedFileTb.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.corruptedFileTb.Size = new System.Drawing.Size(375, 375);
+            this.corruptedFileTb.Size = new System.Drawing.Size(375, 399);
             this.corruptedFileTb.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(151, 27);
+            this.label1.Location = new System.Drawing.Point(162, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 15);
             this.label1.TabIndex = 2;
@@ -68,7 +68,7 @@ namespace FileCorrupter
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(571, 27);
+            this.label2.Location = new System.Drawing.Point(561, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 15);
             this.label2.TabIndex = 3;
@@ -92,11 +92,12 @@ namespace FileCorrupter
             this.Controls.Add(this.label1);
             this.Controls.Add(this.corruptedFileTb);
             this.Controls.Add(this.sourceFileTb);
+            this.MaximizeBox = false;
             this.Name = "FilePreview";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FilePreview";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

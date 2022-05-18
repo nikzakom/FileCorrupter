@@ -21,4 +21,11 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <ContentWithTargetPath Include="info.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>%(Filename)%(Extension)</TargetPath>
+    </ContentWithTargetPath>
+</ItemGroup>
+
 </Project>

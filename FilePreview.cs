@@ -13,7 +13,8 @@ namespace FileCorrupter
         public FilePreview(byte[] sourceFile, byte[] corruptedFile)
         {
             InitializeComponent();
-            // hide focus
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
+            // hide default focus on random element
             this.ActiveControl = fakeLabel;
             Print(this.sourceFileTb, sourceFile);
             Print(this.corruptedFileTb, corruptedFile);
