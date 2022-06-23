@@ -136,28 +136,28 @@ namespace FileCorrupter
             return file;
         }
 
-        private byte[] CorruptFile(byte[] file)
+        public byte[] CorruptFile(byte[] file)
         {
             try
             {
-                byte[] f = new byte[file.Length]; 
-                Array.Copy(file, f, file.Length);
+                byte[] newFile = new byte[file.Length]; 
+                Array.Copy(file, newFile, file.Length);
 
-                byte replacementByte = 255;
+                byte replacementByte = 0xFF;
 
                 int offset = 16;
 
-                if (f.Length <= offset)
+                if (newFile.Length <= offset)
                 {
-                    offset = f.Length / 4;
+                    offset = newFile.Length / 4;
                 }
 
                 for (int i = 0; i < offset; i++)
                 {
-                    f[i] = replacementByte;
+                    newFile[i] = replacementByte;
                 }
 
-                return f;
+                return newFile;
             }
             catch (Exception ex)
             {
