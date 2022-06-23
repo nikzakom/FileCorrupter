@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
-namespace FileCorrupter.UnitTests
+namespace FileCorrupter.Tests
 {
     [TestFixture]
     public class FileProccessingTests
