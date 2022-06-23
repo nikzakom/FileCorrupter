@@ -35,7 +35,7 @@ namespace FileCorrupter
       
             if (openFileDialog.CheckFileExists == false)
             {
-                ShowErrorMessage("File doesn't exist!");
+                ShowMessageBox("Error", "File doesn't exist!");
                 return;
             }
 
@@ -61,7 +61,7 @@ namespace FileCorrupter
 
                         if (sourceFile.Length < 1)
                         {
-                            ShowErrorMessage("File is empty!");
+                            ShowMessageBox("Error", "File is empty!");
                             return;
                         }
 
@@ -69,7 +69,7 @@ namespace FileCorrupter
 
                         if (corruptedFile == null)
                         {
-                            ShowErrorMessage("Something went wrong, please, try again!");
+                            ShowMessageBox("Error", "Something went wrong, please, try again!");
                             return;
                         }
 
@@ -78,7 +78,7 @@ namespace FileCorrupter
                     }
                     catch (Exception ex)
                     {
-                        ShowErrorMessage(ex.ToString());
+                        ShowMessageBox("Error", ex.ToString());
                     }
                 }
             }
@@ -88,7 +88,7 @@ namespace FileCorrupter
         {
             if (sourceFileName == string.Empty || sourceFileName == null)
             {
-                ShowErrorMessage("File was not selected!");
+                ShowMessageBox("Error", "File was not selected!");
                 return;
             }
 
@@ -98,7 +98,7 @@ namespace FileCorrupter
 
                 if (sourceFile.Length < 1)
                 {
-                    ShowErrorMessage("File is empty!");
+                    ShowMessageBox("Error", "File is empty!");
                     return;
                 }
 
@@ -109,7 +109,7 @@ namespace FileCorrupter
 
                 if (corruptedFile == null)
                 {
-                    MessageBox.Show("Something went wrong, please, try again!", "Error");
+                    ShowMessageBox("Error", "Something went wrong, please, try again!");
                     return;
                 }
 
@@ -126,7 +126,7 @@ namespace FileCorrupter
             }
             catch (Exception ex)
             {
-                ShowErrorMessage(ex.ToString());
+                ShowMessageBox("Error", ex.ToString());
             }        
         }
 
@@ -161,7 +161,7 @@ namespace FileCorrupter
             }
             catch (Exception ex)
             {
-                ShowErrorMessage(ex.ToString());
+                ShowMessageBox("Error", ex.ToString());
                 return null;
             }
         }
@@ -170,7 +170,7 @@ namespace FileCorrupter
         {
             if (file == null || file.Length == 0)
             {
-                ShowErrorMessage("Something went wrong...");
+                ShowMessageBox("Error", "Something went wrong, please, try again!");
                 return;
             }
 
@@ -180,7 +180,7 @@ namespace FileCorrupter
             }
             catch (Exception ex)
             {
-                ShowErrorMessage(ex.ToString());
+                ShowMessageBox("Error", ex.ToString());
             }
         }
 
@@ -190,15 +190,12 @@ namespace FileCorrupter
             debugTb.Text += Environment.NewLine;
         }
 
-        /// <summary>
-        /// Shows a message box with title "Error" and custom error text
-        /// </summary>
-        private void ShowErrorMessage(string errorText)
+        private void ShowMessage(string text, string header)
         {
-            MessageBox.Show(errorText, "Error");
+            MessageBox.Show(text, header);
         }
 
-        private void ShowMessage(string text, string header)
+        private void ShowMessageBox(string header, string text)
         {
             MessageBox.Show(text, header);
         }
@@ -223,7 +220,7 @@ namespace FileCorrupter
         {
             if (sourceFileName == string.Empty || sourceFileName == null)
             {
-                ShowErrorMessage("File was not selected!");
+                ShowMessageBox("Error", "File was not selected!");
                 return;
             }
 
@@ -239,7 +236,7 @@ namespace FileCorrupter
 
                 if (sourceFile.Length < 1)
                 {
-                    ShowErrorMessage("File is empty!");
+                    ShowMessageBox("Error", "File is empty!");
                     return;
                 }
 
@@ -247,7 +244,7 @@ namespace FileCorrupter
 
                 if (corruptedFile == null)
                 {
-                    ShowErrorMessage("Something went wrong, please, try again!");
+                    ShowMessageBox("Error", "Something went wrong, please, try again!");
                     return;
                 }
 
@@ -256,7 +253,7 @@ namespace FileCorrupter
             }
             catch (Exception ex)
             {
-                ShowErrorMessage(ex.ToString());
+                ShowMessageBox("Error", ex.ToString());
             }        
         }
 
@@ -264,7 +261,7 @@ namespace FileCorrupter
         {
             if (sourceFileName == string.Empty || sourceFileName == null)
             {
-                ShowErrorMessage("File was not selected!");
+                ShowMessageBox("Error", "File was not selected!");
                 return;
             }
 
@@ -294,7 +291,7 @@ namespace FileCorrupter
             }
             catch
             {
-                ShowErrorMessage("Something went wrong!");
+                ShowMessageBox("Error", "Error reading the app info!" );
             }
         }
     }
