@@ -102,9 +102,8 @@ namespace FileCorrupter
                     return;
                 }
 
-                Print("File readed successfully!");
+                Print("File was read successfully!");
                 Print("Processing...");
-                //Print(BitConverter.ToString(sourceFile));
 
                 corruptedFile = CorruptFile(sourceFile);
 
