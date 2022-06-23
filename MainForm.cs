@@ -45,6 +45,8 @@ namespace FileCorrupter
             }
             else
             {
+                debugTb.Text = string.Empty;
+
                 sourceFileName = openFileDialog.FileName;
 
                 filePathTb.Text = sourceFileName;
@@ -140,24 +142,24 @@ namespace FileCorrupter
         {
             try
             {
-                byte[] newFile = new byte[file.Length]; 
-                Array.Copy(file, newFile, file.Length);
+                byte[] f = new byte[file.Length]; 
+                Array.Copy(file, f, file.Length);
 
-                byte replacementByte = 0xFF;
+                byte replacementByte = 255;
 
                 int offset = 16;
 
-                if (newFile.Length <= offset)
+                if (f.Length <= offset)
                 {
-                    offset = newFile.Length / 4;
+                    offset = f.Length / 4;
                 }
 
                 for (int i = 0; i < offset; i++)
                 {
-                    newFile[i] = replacementByte;
+                    f[i] = replacementByte;
                 }
 
-                return newFile;
+                return f;
             }
             catch (Exception ex)
             {

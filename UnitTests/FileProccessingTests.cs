@@ -34,7 +34,7 @@ namespace FileCorrupter.UnitTests
 
             var outputArray = form.CorruptFile(inputArray);
 
-            Assert.AreEqual(inputArray.Length, outputArray.Length);         
+            Assert.AreEqual(inputArray.Length, outputArray.Length);
         }
 
         [Test]
